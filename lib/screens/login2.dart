@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/components/button_1.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,6 +10,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isObscure = true;
+
+  void loginPressed(){
+    print('ログインボタンがクリックされました')
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,50 +30,51 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                           color: Colors.orange,
-                          ),
-                        ),
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                    ),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                           color: Colors.orange,
-                              ),
-                          ),
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                    ),
+                  ),
                   labelText: 'User name',
-                  labelStyle: TextStyle(color: const Color.fromARGB(255, 243, 187, 33), decoration:TextDecoration.none,),
+                  labelStyle: TextStyle(
+                    color: const Color.fromARGB(255, 243, 187, 33),
+                    decoration: TextDecoration.none,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                     
                   ),
-                  
                 ),
-                ),
-              
-                
               ),
-            
+            ),
+
             SizedBox(height: 20), // 間隔を挿入
             Container(
               width: 200, // TextFormFieldの幅を狭くする
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.orange,
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.orange,
-      ),
-    ),
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                    ),
+                  ),
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: const Color.fromARGB(255, 243, 184, 33)),
+                  labelStyle:
+                      TextStyle(color: const Color.fromARGB(255, 243, 184, 33)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: const Color.fromARGB(255, 243, 142, 33)), // ボーダーの色を指定
+                    borderSide: BorderSide(
+                        color: const Color.fromARGB(
+                            255, 243, 142, 33)), // ボーダーの色を指定
                   ),
-                  
                 ),
               ),
             ),
@@ -79,58 +85,57 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                             ),
-                        ),
-                focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                         color: Colors.orange,
-                                      ),
-                                ),
+                      color: Colors.orange,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                    ),
+                  ),
                   labelText: 'password',
-                  labelStyle: TextStyle(color: const Color.fromARGB(255, 243, 184, 33)),
+                  labelStyle:
+                      TextStyle(color: const Color.fromARGB(255, 243, 184, 33)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: const Color.fromARGB(255, 243, 142, 33)), // ボーダーの色を指定
+                    borderSide: BorderSide(
+                        color: const Color.fromARGB(
+                            255, 243, 142, 33)), // ボーダーの色を指定
                   ),
                 ),
               ),
             ),
-                
 
-                 SizedBox(height: 20), // 間隔を挿入
+            SizedBox(height: 20), // 間隔を挿入
             Container(
               width: 200, // TextFormFieldの幅を狭くする
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                             ),
-                        ),
-                focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                         color: Colors.orange,
-                                      ),
-                                ),
+                      color: Colors.orange,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                    ),
+                  ),
                   labelText: 'password',
-                  labelStyle: TextStyle(color: const Color.fromARGB(255, 243, 184, 33)),
+                  labelStyle:
+                      TextStyle(color: const Color.fromARGB(255, 243, 184, 33)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: const Color.fromARGB(255, 243, 142, 33)), // ボーダーの色を指定
+                    borderSide: BorderSide(
+                        color: const Color.fromARGB(
+                            255, 243, 142, 33)), // ボーダーの色を指定
                   ),
                 ),
               ),
             ),
             SizedBox(height: 20), // 間隔を挿入
-            ElevatedButton(
-              onPressed: () {
-                // ボタンがクリックされたときの処理を追加
-                print('ログインボタンがクリックされました');
-              },
-              child: Text('アカウント登録'),
-            ),
+            button_1(text: 'アカウント登録'  , onPressed: loginPressed)
           ],
         ),
       ),

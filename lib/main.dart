@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "login2.dart";
+import 'screens/login2.dart';
 //import 'package:login_ui/views/auth_page/login.dart';
 
 void main() {
