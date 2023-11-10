@@ -4,3 +4,8 @@ password,Password,パスワード,비밀번호,密码
 login,Login,ログイン,로그인,登录
 newuser,New User?,新しいユーザー？,신규 사용자이신가요?,新用户？
 registerhere,Register here,ここに登録,여기에서 등록하세요,在此注册
+email,Email,Eメール,이메일,电子邮件
+passconf,Password Confirmation,パスワード確認,비밀번호 확인,确认密码
+register,Register,登録,등록하기,登记
+alreadyregisterd,Already registered,登録済み,등록됨,挂号的
+loginhere,Login here,ここから登録,여기에서 등록하기,在这里注册

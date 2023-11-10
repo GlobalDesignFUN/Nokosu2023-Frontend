@@ -5,5 +5,10 @@
     "password": "密码",
     "login": "登录",
     "newuser": "新用户？",
-    "registerhere": "在此注册"
+    "registerhere": "在此注册",
+    "email": "电子邮件",
+    "passconf": "确认密码",
+    "register": "登记",
+    "alreadyregisterd": "挂号的",
+    "loginhere": "在这里注册"
 }

@@ -3,5 +3,10 @@
     "password": "Password",
     "login": "Login",
     "newuser": "New User?",
-    "registerhere": "Register here"
+    "registerhere": "Register here",
+    "email": "Email",
+    "passconf": "Password Confirmation",
+    "register": "Register",
+    "alreadyregisterd": "Already registered",
+    "loginhere": "Login here"
 }

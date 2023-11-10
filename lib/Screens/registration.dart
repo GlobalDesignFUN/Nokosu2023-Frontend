@@ -4,9 +4,12 @@ import 'package:nokosu2023/Components/button_submit.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/popup_info.dart';
 import 'package:nokosu2023/Screens/login.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
+
+
 
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
@@ -17,6 +20,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController password1Controller = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
+
+late AppLocalizations locale;
 
   void register() {
     showDialog(
@@ -47,30 +52,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             InputField(
-              label: 'Username',
+              label: locale.username,
               controller: usernameController,
             ),
             InputField(
-              label: 'Email',
+              label: locale.email,
               controller: emailController,
             ),
             InputField(
-              label: 'Password',
+              label: locale.password,
               controller: password1Controller,
               ispasswordField: true,
             ),
             InputField(
-              label: 'Password Confirmation',
+              label: locale.passconf,
               controller: password2Controller,
               ispasswordField: true,
             ),
             ButtonSubmit(
-              text: 'Register',
+              text: locale.register,
               onPressed: register,
             ),
             ButtonLink(
-              textLabel: 'Already registered? ',
-              textLink: 'Login here',
+              textLabel: locale.alreadyregisterd,
+              textLink: locale.loginhere,
               onPressed: redirectLogin,
             )
           ],

@@ -5,5 +5,10 @@
     "password": "비밀번호",
     "login": "로그인",
     "newuser": "신규 사용자이신가요?",
-    "registerhere": "여기에서 등록하세요"
+    "registerhere": "여기에서 등록하세요",
+    "email": "이메일",
+    "passconf": "비밀번호 확인",
+    "register": "등록하기",
+    "alreadyregisterd": "등록됨",
+    "loginhere": "여기에서 등록하기"
 }
