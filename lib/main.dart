@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
-import "login2.dart";
-//import 'package:login_ui/views/auth_page/login.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/Screens/login.dart';
+import 'package:nokosu2023/providers/locale_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Nokosu());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Nokosu extends StatelessWidget {
+  const Nokosu({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      //title: 'Nokosu',
-      home: LoginPage(),
+    return ChangeNotifierProvider(
+      create: (context) => LocaleProvider(),
+      builder: (context, state) {
+        return MaterialApp(
+          title: 'Nokosu',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Provider.of<LocaleProvider>(context).locale,
+          home: const LoginPage(),
+        );
+      },
     );
   }
 }
