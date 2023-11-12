@@ -6,6 +6,8 @@ part of 'models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+
+
 UserLogin _$UserLoginFromJson(Map<String, dynamic> json) => UserLogin(
       username: json['username'] as String?,
       password: json['password'] as String?,

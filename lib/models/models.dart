@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'models.g.dart';
 
+
 @JsonSerializable()
 class UserLogin {
   String? username;
@@ -19,6 +20,8 @@ class UserLogin {
 
   Map<String, dynamic> toJson() => _$UserLoginToJson(this);
 }
+
+
 
 @JsonSerializable()
 class UserReg {
