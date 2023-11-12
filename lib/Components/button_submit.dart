@@ -22,7 +22,7 @@ class ButtomSubmitState extends State<ButtonSubmit> {
       child: ElevatedButton(
         child: Text(widget.text),
         onPressed: () {
-          widget.onPressed();
+          widget.onPressed();//onPressed = loginのとき、login.dartのlogin()を呼び出す
         },
       ),
     );

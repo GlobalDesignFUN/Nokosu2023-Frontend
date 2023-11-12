@@ -6,7 +6,7 @@ import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/popup_info.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:http/http.dart';//httpリクエストのパッケージ
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -28,6 +28,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() {
+    Future <void> getData() async{
+     // var response = await htt
+    }
+
+
+
     showDialog(
       context: context,
       builder: (context) {
@@ -40,10 +46,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void redirectRegistration() {
+  void redirectRegistration() {//画面切り替え
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const RegistrationPage()),
+      MaterialPageRoute(builder: (context) => const RegistrationPage()),//RegistrationPageに移動
     );
   }
 
@@ -51,29 +57,30 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null, // タイトルを非表示にする
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            InputField(
-              label: locale.username,
-              controller: usernameController,
+      body: Center(//センター寄せ
+        child: Column(//縦にする
+          mainAxisAlignment: MainAxisAlignment.center,//多分センター寄せ
+          children: <Widget>[//子供の要素が
+            InputField(//入力エリア
+              label: locale.username,//ラベルをユーザーネームにする
+              controller: usernameController,//TextEdittingControllerにする
+              ispasswordField: false,
             ),
             InputField(
-              label: locale.password,
-              controller: passwordController,
+              label: locale.password,//ラベル
+              controller: passwordController,//
               ispasswordField: true,
             ),
             ButtonSubmit(
-              text: locale.login,
-              onPressed: login,
+              text: locale.login,//テキストをログインにする
+              onPressed: login,//上のログイン関数を呼び出す
             ),
-            ButtonLink(
+            ButtonLink(//登録画面に移動する
               textLabel: locale.newuser,
               textLink: locale.registerhere,
               onPressed: redirectRegistration,
             ),
-            const DropdownL10n()
+            const DropdownL10n()//ドロップダウンリストを出す
           ],
         ),
       ),

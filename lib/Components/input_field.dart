@@ -37,7 +37,7 @@ class InputFieldState extends State<InputField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
-            controller: widget.controller,
+            controller: widget.controller,//何を入力しているか決める
             obscureText: obscureText,
             decoration: InputDecoration(
               labelText: widget.label,
