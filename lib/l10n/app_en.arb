@@ -1,7 +1,18 @@
 {
-    "username": "Username",
-    "password": "Password",
+    "email": "Email",
+    "forgotpw": "Forgot Password?",
     "login": "Login",
     "newuser": "New User?",
-    "registerhere": "Register here"
+    "password": "Password",
+    "passwordconf": "Password Confirmation",
+    "register": "Register",
+    "registerhere": "Register here",
+    "resethere": "Reset here",
+    "username": "Username",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "allFieldsRequired": "Please fill all the fields",
+    "errcrs": "Couldn't reach the server",
+    "erric": "Invalid credentials",
+    "errfix": "Fix the errors in the form"
 }

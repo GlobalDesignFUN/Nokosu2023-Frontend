@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:nokosu2023/Components/SubComponents/error_field.dart';
+import 'package:nokosu2023/utils/constants.dart';
 
 class InputField extends StatefulWidget {
   final String label;
   final String err;
   final double boxWidth;
+  final double boxHeight;
   final TextEditingController controller;
   final bool ispasswordField;
+  final IconData prefixicon;
 
   const InputField({
     Key? key,
     required this.label,
     required this.controller,
-    this.boxWidth = 200,
+    required this.prefixicon,
+    this.boxWidth = NumericConsts.defBoxWidth,
+    this.boxHeight = NumericConsts.defBoxHeight,
     this.err = '',
     this.ispasswordField = false,
   }) : super(key: key);
@@ -32,12 +39,11 @@ class InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.boxWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
-            controller: widget.controller,//何を入力しているか決める
+            controller: widget.controller,
             obscureText: obscureText,
             decoration: InputDecoration(
               labelText: widget.label,
@@ -61,6 +67,7 @@ class InputFieldState extends State<InputField> {
               color: Colors.red,
             ),
           ),
+          ErrorField(err: widget.err),
         ],
       ),
     );

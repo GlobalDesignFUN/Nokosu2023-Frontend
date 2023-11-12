@@ -4,7 +4,17 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:http/http.dart' as http;
+=======
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/Screens/login.dart';
+import 'package:nokosu2023/providers/form_err_res_provider.dart';
+import 'package:nokosu2023/providers/locale_provider.dart';
+import 'package:nokosu2023/providers/profile_provider.dart';
+import 'package:nokosu2023/providers/token_provider.dart';
+import 'package:provider/provider.dart';
+>>>>>>> 1d50eaa6bfcfacc85f6ceca66f6cb9f2508913c3
 
 void main() => runApp(const MyApp());
 
@@ -25,6 +35,7 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return MaterialApp(
       title: 'APIをPOSTで呼び出しJSONパラメータを渡す',
       theme: ThemeData(
@@ -58,6 +69,24 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
+=======
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
+        ChangeNotifierProvider(create: (context) => FormErrProvider()),
+        ChangeNotifierProvider(create: (context) => TokenProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+      ],
+      builder: (context, state) {
+        return MaterialApp(
+          title: 'Nokosu',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Provider.of<LocaleProvider>(context).locale,
+          home: const LoginPage(),
+        );
+      },
+>>>>>>> 1d50eaa6bfcfacc85f6ceca66f6cb9f2508913c3
     );
   }
 }
