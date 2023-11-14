@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/Screens/login.dart';
+import 'package:nokosu2023/providers/form_err_res_provider.dart';
+import 'package:nokosu2023/providers/locale_provider.dart';
+import 'package:nokosu2023/providers/profile_provider.dart';
+import 'package:nokosu2023/providers/token_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Nokosu());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Nokosu extends StatelessWidget {
+  const Nokosu({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: home(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
+        ChangeNotifierProvider(create: (context) => FormErrProvider()),
+        ChangeNotifierProvider(create: (context) => TokenProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+      ],
+      builder: (context, state) {
+        return MaterialApp(
+          title: 'Nokosu',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Provider.of<LocaleProvider>(context).locale,
+          home: const LoginPage(),
+        );
+      },
     );
   }
 }

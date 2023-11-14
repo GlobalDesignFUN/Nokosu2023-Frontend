@@ -1,0 +1,20 @@
+{
+    "@@locale": "zh",
+
+    "email": "",
+    "forgotpw": "",
+    "login": "登录",
+    "newuser": "新用户？",
+    "password": "密码",
+    "passwordconf": "",
+    "register": "",
+    "registerhere": "在此注册",
+    "resethere": "",
+    "username": "用户名",
+    "firstname": "",
+    "lastname": "",
+    "allFieldsRequired": "",
+    "errcrs": "",
+    "erric": "",
+    "errfix": ""
+}
