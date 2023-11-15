@@ -6,29 +6,23 @@ import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/models/models.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class Infos extends StatefulWidget {
+  const Infos({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<Infos> createState() => _InfosState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  // To get the password and username values
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController formErrorController = TextEditingController();
-  bool loginSuccess = false;
 
-  late AppLocalizations locale;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    locale = AppLocalizations.of(context)!;
-  }
+class _InfosState extends State<Infos> {
 
+  List<Info> infolist =[];
+
+
+/* ここで、見せれるポストがない時を表示するかも
   void login() {
     showDialog(
       context: context,
@@ -41,14 +35,13 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-
+*/
   void redirectRegistration() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const RegistrationPage()),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,26 +51,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            InputField(
-              label: locale.username,
-              controller: usernameController,
-            ),
-            InputField(
-              label: locale.password,
-              controller: passwordController,
-              ispasswordField: true,
-            ),
-            ButtonSubmit(
-              text: locale.login,
-              onPressed: login,
-            ),
+
             ButtonLink(
               textLabel: locale.newuser,
               textLink: locale.registerhere,
               onPressed: redirectRegistration,
             ),
-            const DropdownL10n(),
-            ButtonNavibar()
+            const DropdownL10n()
           ],
         ),
       ),
