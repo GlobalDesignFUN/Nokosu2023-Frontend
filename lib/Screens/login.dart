@@ -6,6 +6,7 @@ import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/popup_info.dart';
 import 'package:nokosu2023/Screens/registration.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/Components/navbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -73,7 +74,8 @@ class _LoginPageState extends State<LoginPage> {
               textLink: locale.registerhere,
               onPressed: redirectRegistration,
             ),
-            const DropdownL10n()
+            const DropdownL10n(),
+            
           ],
         ),
       ),
