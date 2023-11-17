@@ -31,12 +31,10 @@ class _FolderPageState extends State<FolderPage> {
         backgroundColor: ThemeColours.bgBlueWhite,
         title: Row(
           children: [
-            Spacer(), // 左側の余白を埋める
             Icon(Icons.book, color: const Color.fromARGB(255, 0, 30, 75)), // 本のアイコンを追加
             SizedBox(width: 8), // アイコンとタイトルの間にスペースを追加
             Spacer(), // アイコンと右側の余白の間を広げる
             Icon(Icons.person, color: const Color.fromARGB(255, 0, 30, 75)), // 人のアイコンを追加
-            Spacer(), // 右側の余白を埋める
           ],
         ),
         centerTitle: true, // タイトルを中央に配置
@@ -45,14 +43,11 @@ class _FolderPageState extends State<FolderPage> {
         children: [
           AppBar(
             backgroundColor: ThemeColours.bgBlueWhite,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 490.0), // 左端からのスペースを追加
-              child: IconButton(
-                icon: Icon(Icons.arrow_back, color: const Color.fromARGB(255, 0, 30, 75)), // 左向きの矢印を追加
-                onPressed: () {
-                  // 左向きの矢印がタップされたときの処理
-                },
-              ),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: const Color.fromARGB(255, 0, 30, 75)), // 左向きの矢印を追加
+              onPressed: () {
+                // 左向きの矢印がタップされたときの処理
+              },
             ),
             title: Center(
               child: Text(
@@ -106,4 +101,3 @@ class _FolderPageState extends State<FolderPage> {
     );
   }
 }
-
