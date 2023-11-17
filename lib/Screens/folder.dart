@@ -22,7 +22,6 @@ class FolderPage extends StatefulWidget {
 }
 
 class _FolderPageState extends State<FolderPage> {
-  // 追加: ページの初期化時に本のアイコンを選択しているかどうかのフラグ
   bool isBookIconSelected = true;
 
   @override
@@ -88,13 +87,13 @@ class _FolderPageState extends State<FolderPage> {
               ),
             ),
           ),
-          SizedBox(height: 5), // スペースを追加
+          SizedBox(height: 5),
           Expanded(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10.0), // 上部に余白を追加
+                padding: const EdgeInsets.only(top: 10.0),
                 child: GridView.builder(
-                  padding: EdgeInsets.all(0), // 余白をなくす
+                  padding: EdgeInsets.all(0),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
@@ -102,27 +101,34 @@ class _FolderPageState extends State<FolderPage> {
                   itemCount: 9,
                   itemBuilder: (BuildContext context, int index) {
                     if (index == 8) {
-                      // Album9の場合は表示しない
                       return Container();
                     }
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.center, // テキストと四角形を中央に寄せる
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ClipPath(
-                          child: Container(
-                            width: squareSize,
-                            height: squareSize,
+                        Container(
+                          width: squareSize,
+                          height: squareSize,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: isBookIconSelected
+                                  ? const Color.fromARGB(255, 0, 30, 75)
+                                  : Colors.black,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.folder,
                             color: isBookIconSelected
-                                ? const Color.fromARGB(255, 0, 30, 75) // 本のアイコンが選択されている場合
-                                : Colors.black, // 人のアイコンが選択されている場合
+                                ? const Color.fromARGB(255, 0, 30, 75)
+                                : Colors.black,
                           ),
                         ),
-                        SizedBox(height: 8), // 四角形とテキストの間にスペースを追加
+                        SizedBox(height: 8),
                         Text(
-                          'Album ${index + 1}', // Album1, Album2, ... と表示
+                          'Album ${index + 1}',
                           style: TextStyle(color: Colors.black),
                         ),
-                        Spacer(), // Album1, Album4, Album7の後にSpacerを追加
+                        Spacer(),
                       ],
                     );
                   },
