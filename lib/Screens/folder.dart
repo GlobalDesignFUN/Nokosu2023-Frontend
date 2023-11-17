@@ -22,6 +22,9 @@ class FolderPage extends StatefulWidget {
 }
 
 class _FolderPageState extends State<FolderPage> {
+  // 追加: ページの初期化時に本のアイコンを選択しているかどうかのフラグ
+  bool isBookIconSelected = true;
+
   @override
   Widget build(BuildContext context) {
     double squareSize = MediaQuery.of(context).size.width / 20;
@@ -31,10 +34,39 @@ class _FolderPageState extends State<FolderPage> {
         backgroundColor: ThemeColours.bgBlueWhite,
         title: Row(
           children: [
-            Icon(Icons.book, color: const Color.fromARGB(255, 0, 30, 75)), // 本のアイコンを追加
+            // 本のアイコン
+            GestureDetector(
+              onTap: () {
+                // 本のアイコンがタップされたときの処理
+                setState(() {
+                  isBookIconSelected = true;
+                });
+              },
+              child: Icon(
+                Icons.book,
+                color: isBookIconSelected
+                    ? const Color.fromARGB(255, 0, 30, 75)
+                    : Colors.black,
+              ),
+            ),
             SizedBox(width: 8), // アイコンとタイトルの間にスペースを追加
             Spacer(), // アイコンと右側の余白の間を広げる
-            Icon(Icons.person, color: const Color.fromARGB(255, 0, 30, 75)), // 人のアイコンを追加
+
+            // 人のアイコン
+            GestureDetector(
+              onTap: () {
+                // 人のアイコンがタップされたときの処理
+                setState(() {
+                  isBookIconSelected = false;
+                });
+              },
+              child: Icon(
+                Icons.person,
+                color: isBookIconSelected
+                    ? Colors.black
+                    : const Color.fromARGB(255, 0, 30, 75),
+              ),
+            ),
           ],
         ),
         centerTitle: true, // タイトルを中央に配置
@@ -80,7 +112,9 @@ class _FolderPageState extends State<FolderPage> {
                           child: Container(
                             width: squareSize,
                             height: squareSize,
-                            color: const Color.fromARGB(255, 0, 30, 75), // 四角形の色
+                            color: isBookIconSelected
+                                ? const Color.fromARGB(255, 0, 30, 75) // 本のアイコンが選択されている場合
+                                : Colors.black, // 人のアイコンが選択されている場合
                           ),
                         ),
                         SizedBox(height: 8), // 四角形とテキストの間にスペースを追加
