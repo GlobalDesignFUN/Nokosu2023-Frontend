@@ -12,11 +12,15 @@ environment:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   chewie: ^1.5.0
   dio: ^5.2.1
   flutter_riverpod: ^2.2.0
   flutter_lints: ^2.0.0
   image_picker: 1.0.4
+  geolocator: ^7.0.3
+  geocoding: ^2.1.1
   
   
 
