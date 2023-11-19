@@ -22,19 +22,19 @@ class Info extends StatefulWidget{
   final double? longitude;
   final String? address;
 
-  Info({
-    this.id,
-    this.topic,
-    this.description,
-    this.created,
+  const Info({
+    required this.id,
+    required this.topic,
+    required this.description,
+    required this.created,
     this.photo,
     this.url,
     this.group,
-    this.createdBy,
-    this.positive,
-    this.emotion,
-    this.cultural,
-    this.physical,
+    required this.createdBy,
+    required this.positive,
+    required this.emotion,
+    required this.cultural,
+    required this.physical,
     this.location,
     this.latitude,
     this.longitude,
