@@ -11,7 +11,7 @@ import 'package:nokosu2023/providers/profile_provider.dart';
 import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:nokosu2023/Screens/folders.dart';
-import 'package:nokosu2023/Screens/folder.dart';
+import 'package:nokosu2023/Components/folder_component.dart';
 
 void main() {
   runApp(const Nokosu());
