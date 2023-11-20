@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:nokosu2023/Components/evaluate_check.dart';
 import 'package:intl/intl.dart';
+import 'package:nokosu2023/utils/constants.dart';
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      backgroundColor: Colors.black,
+      backgroundColor: ThemeColours.bgBlueWhite,
       body:Center( 
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:<Widget>[
           PostCheck(
-            url : "",
+            url : "https://pbs.twimg.com/media/EVQegDJUEAE2039.jpg",
+            
             title: "Hello",
             detail: "hello",
+            place: "hello",
             emotion:1,
             physical: 0, 
             cultural: 1,
@@ -30,6 +33,10 @@ class Page1 extends StatelessWidget {
                 // Add your button click logic here
                 
               },
+               style: ElevatedButton.styleFrom(
+    primary: Colors.white, // 背景色を白に設定
+    onPrimary: Colors.black, // テキストの色を黒に設定
+  ),
               child: Text('Next ideas'),
             ),
         ],

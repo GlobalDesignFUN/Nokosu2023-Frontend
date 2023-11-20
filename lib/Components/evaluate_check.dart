@@ -11,6 +11,7 @@ class PostCheck extends StatefulWidget {
   final int positive;
   final int blue;
   final String date;
+  final String place;
 
   const PostCheck({
     required this.url,
@@ -22,6 +23,7 @@ class PostCheck extends StatefulWidget {
     required this.positive,
     required this.blue,
     required this.date,
+    required this.place,
   });
 
   @override
@@ -31,7 +33,19 @@ class CheckPostState extends State<PostCheck> {
   @override
   Widget build(BuildContext context) {
      return Container(
-      color: Colors.black,
+      decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: Colors.white,
+                  boxShadow: [
+      BoxShadow(
+                            color: Colors.grey, //色
+                    spreadRadius: 5, 
+                    blurRadius: 5, 
+                    offset: Offset(1, 1),
+      ),
+    ],
+            ),
+
       child: Column(
         children: [
           Container(
@@ -57,6 +71,12 @@ class CheckPostState extends State<PostCheck> {
                     child: Image.network(
                       widget.url,
                       fit: BoxFit.cover, // Adjust this based on your image requirements
+                                   errorBuilder: (c, o, s) {
+                return const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                );
+              },
                     ),
                   ),
                 ),
@@ -77,7 +97,7 @@ class CheckPostState extends State<PostCheck> {
                     Icon(Icons.add_location, color: Colors.black, size: 30),
                     const SizedBox(width: 5),
                     Container(
-                      child: Text("My friend's house"),
+                      child: Text(widget.place),
                     ),
                   ],
                 ),
