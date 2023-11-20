@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -96,7 +97,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: Container(
+        color:Color.fromARGB(255, 186, 226, 251),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,20 +110,35 @@ class _ProfilePageState extends State<ProfilePage> {
     height: 120,
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: const Color.fromARGB(255, 195, 217, 235), // bgBlueWhite に変更
+     color: _profileImage != null
+          ? const Color.fromARGB(255, 195, 217, 235)
+          : Colors.red,// 選択されていない場合の色
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          spreadRadius: 2,
+          blurRadius: 5,
+          offset: Offset(0, 3),
+        ),
+      ],
     ),
-           child: CircleAvatar(
-              radius: 60,
-              backgroundImage: _profileImage != null ? FileImage(_profileImage!) : null,
-              child: _profileImage == null
-                  ? Icon(
-                      Icons.camera_alt,
-                      size: 40,
-                    )
-                  : null,
-            ),
+    child: CircleAvatar(
+      radius: 60,
+      backgroundImage: _profileImage != null ? FileImage(_profileImage!) : null,
+      backgroundColor: _profileImage != null
+          ? const Color.fromARGB(255, 195, 217, 235)
+          : Colors.red, 
+      child: _profileImage == null
+          ? Icon(
+              Icons.camera_alt,
+              size: 40,
+            )
+          : null,
+    ),
   ),
-            ),
+),
+
+            
             SizedBox(height: 10),
             Text(
               _profileName,
