@@ -29,58 +29,108 @@ class _LoginPageState extends State<LoginPage> {
     locale = AppLocalizations.of(context)!;
   }
 
-  void login() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return PopupInfo(
-          title: 'Login Details',
-          info:
-              'Username is ${usernameController.text}\nPassword is ${passwordController.text}',
-        );
-      },
-    );
-  }
-
-  void redirectRegistration() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const RegistrationPage()),
-    );
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: null, // タイトルを非表示にする
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            InputField(
-              label: locale.username,
-              controller: usernameController,
+        appBar: null,
+        backgroundColor: ThemeColours.bgBlueWhite,
+        body: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Neumo(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(
+                          CustIcons.logo,
+                          width: 50,
+                          height: 50,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  InputField(
+                    label: locale.username,
+                    controller: usernameController,
+                    prefixicon: Icons.person,
+                  ),
+                  InputField(
+                    label: locale.password,
+                    controller: passwordController,
+                    ispasswordField: true,
+                    prefixicon: Icons.lock,
+                  ),
+                  ButtonLink(
+                    textLabel: locale.forgotpw,
+                    textLink: locale.resethere,
+                    onPressed: () {
+                      RedirectFunctions.redirectResetPassword(context);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  ErrorField(err: formErrorController.text),
+                  ButtonSubmit(
+                    text: locale.login,
+                    onPressed: () async {
+                      setState(() {
+                        Global.isLoading = true;
+                      });
+
+                      UserLogin data = UserLogin(
+                        username: usernameController.text,
+                        password: passwordController.text,
+                      );
+
+                      int err = await apiLogin(context, data);
+
+                      if (err == 1) {
+                        formErrorController.text = locale.erric;
+                      } else if (err == 2) {
+                        formErrorController.text = locale.errcrs;
+                      } else {
+                        formErrorController.text = "";
+                        loginSuccess = true;
+                      }
+
+                      setState(() {
+                        Global.isLoading = false;
+                      });
+
+                      if (loginSuccess) {
+                        // ignore: use_build_context_synchronously
+                        RedirectFunctions.redirectHome(context);
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ButtonLink(
+                    textLabel: locale.newuser,
+                    textLink: locale.registerhere,
+                    onPressed: () {
+                      RedirectFunctions.redirectRegistration(context);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const DropdownL10n()
+                ],
+              ),
             ),
-            InputField(
-              label: locale.password,
-              controller: passwordController,
-              ispasswordField: true,
-            ),
-            ButtonSubmit(
-              text: locale.login,
-              onPressed: login,
-            ),
-            ButtonLink(
-              textLabel: locale.newuser,
-              textLink: locale.registerhere,
-              onPressed: redirectRegistration,
-            ),
-            const DropdownL10n(),
-            ButtonNavibar()
+            if (Global.isLoading) const LoadingOverlay(),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

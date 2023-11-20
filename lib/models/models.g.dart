@@ -138,6 +138,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) => Group(
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
+      logo: json['logo'] as String?,
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
@@ -145,6 +146,7 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'name': instance.name,
       'createdBy': instance.createdBy,
       'created': instance.created?.toIso8601String(),
+      'logo': instance.logo,
     };
 
 Info _$InfoFromJson(Map<String, dynamic> json) => Info(
