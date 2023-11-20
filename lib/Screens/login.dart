@@ -6,6 +6,13 @@ import 'package:nokosu2023/Components/dropdown_l10n.dart';
 import 'package:nokosu2023/Components/input_field.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nokosu2023/api/api.dart';
+import 'package:nokosu2023/models/models.dart';
+import 'package:nokosu2023/utils/constants.dart';
+import 'package:nokosu2023/utils/global_vars.dart';
+import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,14 +39,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: null,
-        backgroundColor: ThemeColours.bgBlueWhite,
-        body: Stack(
+      appBar: null,
+      backgroundColor: ThemeColours.bgBlueWhite,
+      body: SingleChildScrollView(
+        child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const SizedBox(
+                    height: 100,
+                  ),
                   SizedBox(
                     width: 100,
                     height: 100,
@@ -76,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   const SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
                   ErrorField(err: formErrorController.text),
                   ButtonSubmit(
@@ -93,9 +104,11 @@ class _LoginPageState extends State<LoginPage> {
 
                       int err = await apiLogin(context, data);
 
-                      if (err == 1) {
+                      if (err == Errors.badreq) {
                         formErrorController.text = locale.erric;
-                      } else if (err == 2) {
+                      } else if (err == Errors.unAuth) {
+                        formErrorController.text = locale.errunauth;
+                      } else if (err == Errors.unknown) {
                         formErrorController.text = locale.errcrs;
                       } else {
                         formErrorController.text = "";
@@ -125,12 +138,17 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const DropdownL10n()
+                  const DropdownL10n(),
+                  const SizedBox(
+                    height: 50,
+                  ),
                 ],
               ),
             ),
             if (Global.isLoading) const LoadingOverlay(),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
