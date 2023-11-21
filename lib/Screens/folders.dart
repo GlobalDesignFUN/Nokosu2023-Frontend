@@ -5,6 +5,7 @@ import 'package:nokosu2023/Components/SubComponents/group_add.dart';
 import 'package:nokosu2023/Components/bar_bottom.dart';
 import 'package:nokosu2023/Components/bar_top.dart';
 import 'package:nokosu2023/Components/loading_overlay.dart';
+import 'package:nokosu2023/Components/folder_component.dart';
 import 'package:nokosu2023/api/api.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/group_provider.dart';
@@ -45,14 +46,22 @@ class FolderScreenState extends State<FolderScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-    groupWidgets = groups
-        .map((group) => GroupFolder(
-              group: group,
-              groupController: TextEditingController(),
-              groupNameController: TextEditingController(),
-              folderView: true,
-            ))
-        .toList();
+    groupWidgets = [
+      ...groups.map(
+        (group) => GroupFolder(
+          group: group,
+          groupController: TextEditingController(),
+          groupNameController: TextEditingController(),
+          folderView: true,
+        ),
+      ),
+      ...List.generate(
+        9 - groups.length,
+        (index) => FolderComponent(folderName: 'Folder ${index + 1}'),
+      ),
+      const GroupAddFolder(folderView: true),
+    ];
+
     return WillPopScope(
       onWillPop: () async {
         Provider.of<HomeStateProvider>(context, listen: false).setState(0);
@@ -81,10 +90,7 @@ class FolderScreenState extends State<FolderScreen> {
                               crossAxisSpacing: 15,
                               mainAxisSpacing: 15,
                               crossAxisCount: 3,
-                              children: [
-                                ...groupWidgets,
-                                const GroupAddFolder(folderView: true)
-                              ],
+                              children: groupWidgets,
                             ),
                           ),
                         ],

@@ -57,7 +57,7 @@ class Nokosu extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: Provider.of<LocaleProvider>(context).locale,
-          home: const HomePage(),
+          home: const FolderScreen(),
         );
       },
     );
