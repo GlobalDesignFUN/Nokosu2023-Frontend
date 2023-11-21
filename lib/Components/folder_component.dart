@@ -21,22 +21,47 @@ class FolderComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.folder,
-            size: 40,
-            color: Colors.blue,
-          ),
-          SizedBox(height: 10),
-          Text(
-            folderName,
-            style: TextStyle(fontSize: 16),
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        // フォルダアイコンがタップされたときの処理
+        // ここにページ遷移などの処理を追加
+        // 例えば、Navigator.pushなどを使用して新しいページに遷移できます
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SecondPage()),
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.folder,
+              size: 40,
+              color: Colors.blue,
+            ),
+            SizedBox(height: 10),
+            Text(
+              folderName,
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second Page'),
+      ),
+      body: Center(
+        child: Text('This is the second page'),
       ),
     );
   }
