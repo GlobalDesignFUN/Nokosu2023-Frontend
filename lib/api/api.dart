@@ -31,22 +31,22 @@ Future<int> apiRegister(context, UserReg data) async {
       _setProfile(context, jsonDecode(await response.stream.bytesToString()));
       Provider.of<FormErrProvider>(context, listen: false)
           .setModel(UserRegResponse());
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 400) {
       UserRegResponse userres = UserRegResponse.fromJson(
           jsonDecode(await response.stream.bytesToString()));
       Provider.of<FormErrProvider>(context, listen: false).setModel(userres);
-      return 1;
+      return Errors.badreq;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -62,19 +62,19 @@ Future<int> apiLogin(context, UserLogin data) async {
 
     if (response.statusCode == 200) {
       _setProfile(context, jsonDecode(response.body));
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 400) {
-      return 1;
+      return Errors.badreq;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -91,18 +91,19 @@ Future<int> apiLogout(context) async {
     );
 
     if (response.statusCode == 200) {
-      Provider.of<TokenProvider>(context, listen: false).setToken("", 0);
-      return 0;
+      Provider.of<TokenProvider>(context, listen: false)
+          .setToken("", Errors.none);
+      return Errors.none;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -121,17 +122,17 @@ Future<int> apiGetProfile(context, int id) async {
     if (response.statusCode == 200) {
       Provider.of<ProfileProvider>(context, listen: false)
           .setModel(Profile.fromJson(jsonDecode(response.body)));
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -159,152 +160,30 @@ Future<int> apiUpdateProfile(context, UserReg data, String file, int id) async {
           Profile.fromJson(jsonDecode(await response.stream.bytesToString())));
       Provider.of<FormErrProvider>(context, listen: false)
           .setModel(UserRegResponse());
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 400) {
       UserRegResponse userres = UserRegResponse.fromJson(
           jsonDecode(await response.stream.bytesToString()));
       Provider.of<FormErrProvider>(context, listen: false).setModel(userres);
-      return 1;
+      return Errors.badreq;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
-  // apiDelProfile
-  
-
-// Group
-Future<int> apiGetGroups(context) async {
-  try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
-
-    final response = await http
-        .get(Uri.parse('${APILinks.base}groups/'), headers: <String, String>{
-      'Content-Type': 'application/json',
-      'Authorization': 'Token $token',
-    });
-
-    if (response.statusCode == 200) {
-      Provider.of<GroupsProvider>(context, listen: false).setModels([]);
-      var json = jsonDecode(response.body);
-      for (var each in json) {
-        Provider.of<GroupsProvider>(context, listen: false)
-            .addModel(Group.fromJson(each));
-      }
-      return 0;
-    } else if (response.statusCode == 401) {
-      return 4;
-    } else {
-      return 2;
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print("Exception : $e");
-    }
-    return 2;
-  }
-}
-
-Future<int> apiGetGroup(context, int id) async {
-  try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
-
-    final response = await http.get(Uri.parse('${APILinks.base}groups/$id/'),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $token',
-        });
-
-    if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-      for (var each in json) {
-        Provider.of<InfosProvider>(context, listen: false)
-            .addModel(Info.fromJson(each));
-      }
-      return 0;
-    } else if (response.statusCode == 401) {
-      return 4;
-    } else {
-      return 2;
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print("Exception : $e");
-    }
-    return 2;
-  }
-}
-
-Future<int> apiAddgroup(context, String data) async {
-  try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
-    var request =
-        http.MultipartRequest('POST', Uri.parse('${APILinks.base}groups/'));
-
-    request.fields['name'] = data;
-    request.headers['Authorization'] = 'Token $token';
-
-    final response = await request.send();
-
-    if (response.statusCode == 200) {
-      Group group =
-          Group.fromJson(jsonDecode(await response.stream.bytesToString()));
-      Provider.of<GroupsProvider>(context, listen: false).addModel(group);
-      return 0;
-    } else if (response.statusCode == 401) {
-      return 4;
-    } else {
-      return 2;
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print("Exception : $e");
-    }
-    return 2;
-  }
-}
-
-Future<int> apiUpdateGroup(context, String data, int id) async {
-  try {
-    String token = Provider.of<TokenProvider>(context, listen: false).token;
-    var request =
-        http.MultipartRequest('PUT', Uri.parse('${APILinks.base}groups/$id/'));
-
-    request.fields['name'] = data;
-    request.headers['Authorization'] = 'Token $token';
-
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      Group group =
-          Group.fromJson(jsonDecode(await response.stream.bytesToString()));
-      Provider.of<GroupsProvider>(context, listen: false).addModel(group);
-      return 0;
-    } else if (response.statusCode == 401) {
-      return 4;
-    } else {
-      return 2;
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print("Exception : $e");
-    }
-    return 2;
-  }
-}
-
-Future<int> apiDelGroup(context, int id) async {
+Future<int> apiDelProfile(context, int id) async {
   try {
     String token = Provider.of<TokenProvider>(context, listen: false).token;
     var request = http.MultipartRequest(
-        'DELETE', Uri.parse('${APILinks.base}groups/$id/'));
+        'DELETE', Uri.parse('${APILinks.base}profiles/$id/'));
 
     request.headers['Authorization'] = 'Token $token';
 
@@ -328,6 +207,159 @@ Future<int> apiDelGroup(context, int id) async {
   }
 }
 
+// Group
+Future<int> apiGetGroups(context) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+
+    final response = await http
+        .get(Uri.parse('${APILinks.base}groups/'), headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    });
+
+    if (response.statusCode == 200) {
+      Provider.of<GroupsProvider>(context, listen: false).setModels([]);
+      var json = jsonDecode(response.body);
+      for (var each in json) {
+        Provider.of<GroupsProvider>(context, listen: false)
+            .addModel(Group.fromJson(each));
+      }
+      return Errors.none;
+    } else if (response.statusCode == 401) {
+      return Errors.unAuth;
+    } else {
+      return Errors.unknown;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return Errors.unknown;
+  }
+}
+
+Future<int> apiGetGroup(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+
+    final response = await http.get(Uri.parse('${APILinks.base}groups/$id/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Token $token',
+        });
+
+    if (response.statusCode == 200) {
+      Provider.of<InfosProvider>(context, listen: false).setModels([]);
+      var json = jsonDecode(response.body);
+      for (var each in json) {
+        Provider.of<InfosProvider>(context, listen: false)
+            .addModel(Info.fromJson(each));
+      }
+      return Errors.none;
+    } else if (response.statusCode == 401) {
+      return Errors.unAuth;
+    } else {
+      return Errors.unknown;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return Errors.unknown;
+  }
+}
+
+Future<int> apiAddgroup(context, String data) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+
+    var request =
+        http.MultipartRequest('POST', Uri.parse('${APILinks.base}groups/'));
+
+    request.fields['name'] = data;
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      Group group =
+          Group.fromJson(jsonDecode(await response.stream.bytesToString()));
+      Provider.of<GroupProvider>(context, listen: false).setModel(group);
+      return Errors.none;
+    } else if (response.statusCode == 401) {
+      return Errors.unAuth;
+    } else if (response.statusCode == 400) {
+      return Errors.badreq;
+    } else {
+      return Errors.unknown;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return Errors.unknown;
+  }
+}
+
+Future<int> apiUpdateGroup(context, String data, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request =
+        http.MultipartRequest('PUT', Uri.parse('${APILinks.base}groups/$id/'));
+
+    request.fields['name'] = data;
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      Group group =
+          Group.fromJson(jsonDecode(await response.stream.bytesToString()));
+      Provider.of<GroupProvider>(context, listen: false).setModel(group);
+      return Errors.none;
+    } else if (response.statusCode == 401) {
+      return Errors.unAuth;
+    } else if (response.statusCode == 400) {
+      return Errors.badreq;
+    } else {
+      return Errors.unknown;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return Errors.unknown;
+  }
+}
+
+Future<int> apiDelGroup(context, int id) async {
+  try {
+    String token = Provider.of<TokenProvider>(context, listen: false).token;
+    var request = http.MultipartRequest(
+        'DELETE', Uri.parse('${APILinks.base}groups/$id/'));
+
+    request.headers['Authorization'] = 'Token $token';
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      Provider.of<ProfileProvider>(context, listen: false).setModel(Profile());
+      return Errors.none;
+    } else if (response.statusCode == 400) {
+      return Errors.badreq;
+    } else if (response.statusCode == 401) {
+      return Errors.unAuth;
+    } else {
+      return Errors.unknown;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return Errors.unknown;
+  }
+}
+
 // Info
 Future<int> apiGetInfos(context) async {
   try {
@@ -346,17 +378,17 @@ Future<int> apiGetInfos(context) async {
         Provider.of<InfosProvider>(context, listen: false)
             .addModel(Info.fromJson(each));
       }
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -373,17 +405,17 @@ Future<int> apiGetInfo(context, int id) async {
     if (response.statusCode == 200) {
       Provider.of<InfoProvider>(context, listen: false)
           .setModel(Info.fromJson(jsonDecode(response.body)));
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -405,17 +437,17 @@ Future<int> apiAddInfo(context, Info data, String file) async {
     if (response.statusCode == 200) {
       Provider.of<InfoProvider>(context, listen: false).setModel(
           Info.fromJson(jsonDecode(await response.stream.bytesToString())));
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -436,17 +468,17 @@ Future<int> apiUpdateInfo(context, Info data, int id) async {
     if (response.statusCode == 200) {
       Provider.of<InfoProvider>(context, listen: false).setModel(
           Info.fromJson(jsonDecode(await response.stream.bytesToString())));
-      return 0;
+      return Errors.none;
     } else if (response.statusCode == 401) {
-      return 4;
+      return Errors.unAuth;
     } else {
-      return 2;
+      return Errors.unknown;
     }
   } catch (e) {
     if (kDebugMode) {
       print("Exception : $e");
     }
-    return 2;
+    return Errors.unknown;
   }
 }
 
@@ -462,6 +494,34 @@ Future<int> apiDelInfo(context, int id) async {
 
     if (response.statusCode == 200) {
       Provider.of<InfoProvider>(context, listen: false).setModel(Info());
+      return Errors.none;
+    } else if (response.statusCode == 400) {
+      return Errors.badreq;
+    } else if (response.statusCode == 401) {
+      return Errors.unAuth;
+    } else {
+      return Errors.unknown;
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print("Exception : $e");
+    }
+    return Errors.unknown;
+  }
+}
+
+// Email
+Future<int> apigetMail(context, String data) async {
+  try {
+    final response = await http.post(
+      Uri.parse('${APILinks.base}password_reset/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode('{"email": $data}'),
+    );
+
+    if (response.statusCode == 200) {
       return 0;
     } else if (response.statusCode == 400) {
       return 1;
@@ -477,8 +537,4 @@ Future<int> apiDelInfo(context, int id) async {
     return 2;
   }
 }
-
-// Email
-  // apiGetMail
-
-  // apiUpdatePw
+// apiUpdatePw : Not required atm
