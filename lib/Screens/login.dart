@@ -21,6 +21,11 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+
+
+
+
+
 class _LoginPageState extends State<LoginPage> {
   // To get the password and username values
   TextEditingController usernameController = TextEditingController();
@@ -77,8 +82,9 @@ class _LoginPageState extends State<LoginPage> {
                     label: locale.password,
                     controller: passwordController,
                     ispasswordField: true,
-                    prefixicon: Icons.lock,
-                  ),
+                    prefixicon: mySvgIcon,
+                        
+),
                   ButtonLink(
                     textLabel: locale.forgotpw,
                     textLink: locale.resethere,
