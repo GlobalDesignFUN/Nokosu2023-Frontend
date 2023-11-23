@@ -59,7 +59,7 @@ class _GroupFormState extends State<GroupFormAdd> {
                       child: InputField(
                           label: locale.group,
                           controller: groupController,
-                          prefixicon: Icons.supervisor_account_outlined),
+                          prefixicon: "assets/icons/logo.svg"),
                     ),
                     Positioned(
                       top: 130,

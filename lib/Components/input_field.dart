@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Components/SubComponents/error_field.dart';
 import 'package:nokosu2023/utils/constants.dart';
+
 
 class InputField extends StatefulWidget {
   final String label;
@@ -12,7 +14,7 @@ class InputField extends StatefulWidget {
   final double boxHeight;
   final TextEditingController controller;
   final bool ispasswordField;
-  final IconData prefixicon;
+  final String prefixicon;
   final double border;
 
   const InputField({
@@ -60,10 +62,17 @@ class InputFieldState extends State<InputField> {
                   border: InputBorder.none,
                   hintText: widget.label,
                   hintStyle: const TextStyle(color: ThemeColours.txtGrey),
-                  prefixIcon: Icon(
+                  prefixIcon: IconButton(
+
+                    icon :  SvgPicture.asset(
                     widget.prefixicon,
-                    color: ThemeColours.iconBlack,
+                    width: 20,
+                    height:20,
+                    
                   ),
+                  onPressed: null,
+                  ),
+                  
                   suffixIcon: widget.ispasswordField
                       ? IconButton(
                           icon: Icon(

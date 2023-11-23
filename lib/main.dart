@@ -1,16 +1,10 @@
-
-// ignore: file_names
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nokosu2023/Components/SubComponents/neumorphism.dart';
 import 'package:nokosu2023/Screens/home.dart';
-
-import 'package:nokosu2023/Screens/evaluate_check_screen.dart';
+import 'package:nokosu2023/Screens/login.dart';
 import 'package:nokosu2023/providers/form_err_res_provider.dart';
 import 'package:nokosu2023/providers/group_provider.dart';
 import 'package:nokosu2023/providers/home_state.dart';
@@ -21,23 +15,18 @@ import 'package:nokosu2023/providers/token_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const Nokosu());
+}
 
 class Nokosu extends StatelessWidget {
   const Nokosu({Key? key}) : super(key: key);
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  late Future<ApiResults> res;
-  @override
-  void initState() {
-    super.initState();
-    res = fetchApiResults();
+  Future<void> fetchData() async {
+    await TokenProvider().loadDeviceToken();
+    await Future.delayed(const Duration(seconds: 1));
   }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -62,12 +51,19 @@ class _MyAppState extends State<MyApp> {
       builder: (context, state) {
         int id = Provider.of<TokenProvider>(context, listen: false).id;
         return MaterialApp(
-          title: 'Nokosu',
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: Provider.of<LocaleProvider>(context).locale,
-          home: const HomePage(),
-        );
+            title: 'Nokosu',
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Provider.of<LocaleProvider>(context).locale,
+            home: FutureBuilder(
+                future: fetchData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return id == 0 ? const LoginPage() : const HomePage();
+                  } else {
+                    return const CustomSplashScreen();
+                  }
+                }));
       },
     );
   }

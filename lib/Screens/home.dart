@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         Global.isLoading = false;
                       });
                     },
-                    icon: SvgPicture.asset(CustIcons.capture),
+                    icon: SvgPicture.asset("assets/icons/capture.svg"),
                   ),
                 ),
               ),

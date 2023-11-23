@@ -191,6 +191,7 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ),
                   const SizedBox(height: 10),
+                  /*
                   InputField(
                     label: locale.topic,
                     controller: topicController,
@@ -205,6 +206,7 @@ class _InfoPageState extends State<InfoPage> {
                     border: 10,
                     isErr: false,
                   ),
+                  */
                   GestureDetector(
                     onTap: () {
                       showDialog(
@@ -218,7 +220,7 @@ class _InfoPageState extends State<InfoPage> {
                     child: InputField(
                       label: locale.group,
                       controller: groupNameController,
-                      prefixicon: Icons.supervisor_account_outlined,
+                      prefixicon:"assets/icons/logo.svg",
                       border: 10,
                       isErr: false,
                       isEnabled: false,
@@ -227,10 +229,11 @@ class _InfoPageState extends State<InfoPage> {
                   InputField(
                     label: locale.locname,
                     controller: locationController,
-                    prefixicon: Icons.add_location_alt_outlined,
+                    prefixicon: "assets/icons/logo.svg",
                     border: 10,
                     isErr: false,
                   ),
+                  
                   if (_isLocationAvailable)
                     Text('${locale.address} : $address'),
                   const SizedBox(height: 30),
