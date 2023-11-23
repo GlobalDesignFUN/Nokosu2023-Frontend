@@ -21,6 +21,24 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+IconData svgToIcon(String svgPath) {
+  final String iconData = '''
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      $svgPath
+    </svg>
+  ''';
+
+  return const IconData(
+    0xe800, // 0xe800 の値は適切なものに置き換えてください
+    fontFamily: 'password',
+    fontPackage: 'flutter_svg',
+  );
+}
+
+
+IconData mySvgIcon = svgToIcon('password.svg');
+
+
 class _LoginPageState extends State<LoginPage> {
   // To get the password and username values
   TextEditingController usernameController = TextEditingController();
@@ -77,8 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                     label: locale.password,
                     controller: passwordController,
                     ispasswordField: true,
-                    prefixicon: Icons.lock,
-                  ),
+                    prefixicon: mySvgIcon,
+                        
+),
                   ButtonLink(
                     textLabel: locale.forgotpw,
                     textLink: locale.resethere,
