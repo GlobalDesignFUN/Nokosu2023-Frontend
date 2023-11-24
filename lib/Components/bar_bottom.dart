@@ -5,6 +5,7 @@ import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({
@@ -50,7 +51,9 @@ class BarState extends State<BottomBar> {
               left: 30,
               bottom: 30,
               child: IconButton(
-                icon: const Icon(Icons.photo_library_outlined),
+                icon: SvgPicture.asset(
+                  "assets/icons/album.svg"
+                ),
                 onPressed: () async {
                   XFile image =
                       (await picker.pickImage(source: ImageSource.gallery))!;
@@ -65,7 +68,9 @@ class BarState extends State<BottomBar> {
                 color: homeState == 0
                     ? ThemeColours.iconblue
                     : ThemeColours.iconBlack,
-                icon: const Icon(Icons.camera_alt),
+                icon: SvgPicture.asset(
+                  "assets/icons/camera.svg"
+                ),
                 onPressed: () {
                   if (homeState != 0) {
                     setState(() {
@@ -84,7 +89,9 @@ class BarState extends State<BottomBar> {
                 color: homeState == 1
                     ? ThemeColours.iconblue
                     : ThemeColours.iconBlack,
-                icon: const Icon(Icons.supervisor_account_outlined),
+                icon: SvgPicture.asset(
+                  "assets/icons/groups.svg"
+                ),
                 onPressed: () {
                   if (homeState != 1) {
                     setState(() {

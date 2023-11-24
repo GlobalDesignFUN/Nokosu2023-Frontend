@@ -65,9 +65,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: Align(
                       alignment: Alignment.center,
                       child: SvgPicture.asset(
-                        CustIcons.logo,
-                        width: 50,
-                        height: 50,
+                        "assets/icons/nokosu_logo.svg"
+                       
                       ),
                     ),
                   ),
@@ -98,39 +97,39 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             InputField(
                               label: locale.username,
                               controller: usernameController,
-                              prefixicon: Icons.person,
+                              prefixicon: "assets/icons/icon.svg",
                               err: formErrProvider.username!.message!,
                             ),
                             InputField(
                               label: locale.email,
                               controller: emailController,
-                              prefixicon: Icons.email,
+                              prefixicon: "assets/icons/mail.svg",
                               err: formErrProvider.email!.message!,
                             ),
                             InputField(
                               label: locale.firstname,
                               controller: firstNameController,
-                              prefixicon: Icons.supervisor_account_outlined,
+                              prefixicon: "assets/icons/icon.svg",
                               err: formErrProvider.first_name!.message!,
                             ),
                             InputField(
                               label: locale.lastname,
                               controller: lastNameController,
-                              prefixicon: Icons.supervisor_account,
+                              prefixicon: "assets/icons/icon.svg",
                               err: formErrProvider.last_name!.message!,
                             ),
                             InputField(
                               label: locale.password,
                               controller: password1Controller,
                               ispasswordField: true,
-                              prefixicon: Icons.lock,
+                              prefixicon: "assets/icons/password.svg",
                               err: formErrProvider.password1!.message!,
                             ),
                             InputField(
                               label: locale.passwordconf,
                               controller: password2Controller,
                               ispasswordField: true,
-                              prefixicon: Icons.lock_person,
+                              prefixicon: "assets/icons/password.svg",
                               err: formErrProvider.password2!.message!,
                             ),
                           ],

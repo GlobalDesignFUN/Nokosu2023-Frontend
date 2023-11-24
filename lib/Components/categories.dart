@@ -8,6 +8,7 @@ import 'package:nokosu2023/api/api.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Categories extends StatefulWidget {
   final Info info;
@@ -57,8 +58,8 @@ class CategoriesState extends State<Categories> {
                   ButtonFlip(
                     textLabelYes: locale.positive,
                     textLabelNo: locale.negative,
-                    iconYes: CustIcons.positive,
-                    iconNo: CustIcons.negative,
+                    iconYes: "assets/icons/emotional.svg",
+                    iconNo: "assets/icons/nonemotional.svg",
                     onButtonPressed: (value) {
                       setState(() {
                         positive = value;

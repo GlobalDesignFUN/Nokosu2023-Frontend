@@ -12,6 +12,7 @@ import 'package:nokosu2023/Components/preview.dart';
 import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class InfoPage extends StatefulWidget {
   final String image;
@@ -194,14 +195,14 @@ class _InfoPageState extends State<InfoPage> {
                   InputField(
                     label: locale.topic,
                     controller: topicController,
-                    prefixicon: Icons.topic_outlined,
+                    prefixicon: "assets/icons/logo.svg",
                     border: 10,
                     isErr: false,
                   ),
                   InputField(
                     label: locale.desc,
                     controller: descController,
-                    prefixicon: Icons.carpenter_outlined,
+                    prefixicon: "assets/icons/pen.svg",
                     border: 10,
                     isErr: false,
                   ),
@@ -218,7 +219,7 @@ class _InfoPageState extends State<InfoPage> {
                     child: InputField(
                       label: locale.group,
                       controller: groupNameController,
-                      prefixicon: Icons.supervisor_account_outlined,
+                      prefixicon: "assets/icons/group.svg",
                       border: 10,
                       isErr: false,
                       isEnabled: false,
@@ -227,7 +228,7 @@ class _InfoPageState extends State<InfoPage> {
                   InputField(
                     label: locale.locname,
                     controller: locationController,
-                    prefixicon: Icons.add_location_alt_outlined,
+                    prefixicon: "assets/icons/location.svg",
                     border: 10,
                     isErr: false,
                   ),

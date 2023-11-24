@@ -4,6 +4,7 @@ import 'package:nokosu2023/providers/home_state.dart';
 import 'package:nokosu2023/utils/static_functions.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TopBar extends StatefulWidget {
   final GlobalKey<CameraState> camkey;
@@ -61,7 +62,9 @@ class TopBarState extends State<TopBar> {
                 widget.middleIcon,
                 widget.rightmiddleIcon,
                 IconButton(
-                  icon: const Icon(Icons.person_outline),
+                  icon: SvgPicture.asset(
+                  "assets/icons/icon.svg"
+                ),
                   onPressed: () {},
                 ),
               ],
