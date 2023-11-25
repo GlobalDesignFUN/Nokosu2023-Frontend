@@ -19,6 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class InfoView extends StatefulWidget {
   final Info info;
@@ -126,7 +127,7 @@ class _InfoViewState extends State<InfoView> {
                       camkey: GlobalKey(),
                       rightmiddleIcon: currentId == widget.info.createdBy
                           ? IconButton(
-                              icon: const Icon(Icons.edit),
+                              icon: SvgPicture.asset(CustIcons.comment),
                               onPressed: () async {
                                 if (infosReady) {
                                   showDialog(
