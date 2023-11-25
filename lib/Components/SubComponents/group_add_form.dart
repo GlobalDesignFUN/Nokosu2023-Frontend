@@ -10,6 +10,7 @@ import 'package:nokosu2023/models/models.dart';
 import 'package:nokosu2023/providers/group_provider.dart';
 import 'package:nokosu2023/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GroupFormAdd extends StatefulWidget {
   final bool isUpdate;
@@ -60,7 +61,7 @@ class _GroupFormState extends State<GroupFormAdd> {
                       child: InputField(
                           label: locale.group,
                           controller: groupController,
-                          prefixicon: Icons.supervisor_account_outlined),
+                          prefixicon: SvgPicture.asset(CustIcons.topic)),
                     ),
                     Positioned(
                       top: 130,

@@ -59,11 +59,11 @@ class _HomePageState extends State<HomePage> {
             TopBar(
               camkey: cameraKey,
               middleIcon: IconButton(
-                icon: Icon(flashMode == 1
-                    ? Icons.flash_auto
+                icon: flashMode == 1
+                    ? SvgPicture.asset(CustIcons.flashauto)
                     : flashMode == 2
-                        ? Icons.flash_on
-                        : Icons.flash_off),
+                        ? SvgPicture.asset(CustIcons.flash)
+                        : SvgPicture.asset(CustIcons.flashno),
                 onPressed: () async {
                   final cameraState = cameraKey.currentState;
 

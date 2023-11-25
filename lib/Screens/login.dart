@@ -66,13 +66,13 @@ class _LoginPageState extends State<LoginPage> {
                   InputField(
                     label: locale.username,
                     controller: usernameController,
-                    prefixicon: Icons.person,
+                    prefixicon: SvgPicture.asset(CustIcons.profile),
                   ),
                   InputField(
                     label: locale.password,
                     controller: passwordController,
                     ispasswordField: true,
-                    prefixicon: Icons.lock,
+                    prefixicon: SvgPicture.asset(CustIcons.lock),
                   ),
                   ButtonLink(
                     textLabel: locale.forgotpw,
