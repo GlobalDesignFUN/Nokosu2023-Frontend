@@ -195,7 +195,9 @@ class _InfoPageState extends State<InfoPage> {
                   InputField(
                     label: locale.topic,
                     controller: topicController,
-                    prefixicon: SvgPicture.asset(CustIcons.topic),
+                    prefixicon: SvgPicture.asset(CustIcons.topic,
+                    height:24,
+                    width:24),
                     border: 10,
                     isErr: false,
                   ),

@@ -93,7 +93,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             InputField(
                               label: locale.username,
                               controller: usernameController,
-                              prefixicon: SvgPicture.asset(CustIcons.profile),
+                              prefixicon: SvgPicture.asset(CustIcons.profile,
+                              height: 12,
+                              width: 12,),
                               err: formErrProvider.username!.message!,
                             ),
                             InputField(
@@ -118,7 +120,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               label: locale.password,
                               controller: password1Controller,
                               ispasswordField: true,
-                              prefixicon: const Icon(Icons.lock),
+                              prefixicon: SvgPicture.asset(CustIcons.lock),
                               err: formErrProvider.password1!.message!,
                             ),
                             InputField(

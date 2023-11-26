@@ -66,7 +66,10 @@ class _LoginPageState extends State<LoginPage> {
                   InputField(
                     label: locale.username,
                     controller: usernameController,
-                    prefixicon: SvgPicture.asset(CustIcons.profile),
+                    prefixicon: SvgPicture.asset(CustIcons.profile,
+                    height: 24,
+                    width: 24,
+                    ),
                   ),
                   InputField(
                     label: locale.password,

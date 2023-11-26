@@ -89,7 +89,7 @@ class TopBarState extends State<TopBar> {
                         },
                       )
                     : IconButton(
-                        icon: SvgPicture.asset(CustIcons.profile),
+                        icon: const Icon(Icons.person),
                         onPressed: () {
                           RedirectFunctions.redirectprofile(context);
                         },
